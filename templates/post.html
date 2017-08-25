@@ -1,0 +1,73 @@
+<div class="col-md-offset-2 col-md-8 post">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <section class="post-heading">
+                <div class="row">
+                    <div class="col-md-11">
+                        <div class="media">
+                            <div class="media-left">
+                                <img class="media-object photo-profile" src="/static/images/default-photo.png" width="40" height="40" alt="...">
+                            </div>
+                            <div class="media-body">
+                                <a href="/{{p.key().id()}}" class="anchor-username">
+                                    <h4 class="media-heading">{{author}}</h4>
+                                </a>
+                                <span class="anchor-time">{{p.created.strftime("%b %d, %Y")}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    {% if current_user_id != None and current_user_id == p.user_id %}
+                    <div class="col-md-1 dropdown show">
+                        <a class="btn btn-secondary dropdown-toggle" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="glyphicon glyphicon-chevron-down">
+                          </i> </a>
+
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                            <a class="dropdown-item" href="/{{p.key().id()}}/edit">Edit </a><br>
+                            <a class="dropdown-item" href="/{{p.key().id()}}/delete">Delete</a>
+                        </div>
+
+                    </div>
+                    {% endif %}
+                </div>
+            </section>
+
+            <section class="post-body">
+                <header class="post-title">
+                    <h4>
+                        subject: {{p.subject}}
+                    </h4>
+                </header>
+                <p> {{p._render_text | safe}}</p>
+            </section>
+            <section class="post-footer">
+                <hr>
+                <div class="post-footer-option container">
+                    <ul class="list-unstyled">
+                        {% if current_user_id == None %}
+
+                        <li>
+                            <a href="/login"> <span class="like"> {{p.likes}}</span><i class="glyphicon glyphicon-thumbs-up"></i>Like</a>
+                        </li>
+                        <li>
+                            <a href="/login">
+                                <i class="glyphicon glyphicon-comment"></i> Comment</a>
+                        </li>
+                        {% elif current_user_id != p.user_id %}
+
+                        <li>
+                            <a href="/{{p.key().id()}}/like"><span class="like"> {{p.likes}}</span><i class="glyphicon glyphicon-thumbs-up "></i> Like</a></li>
+                        <li>
+                            <a href="/{{p.key().id()}}/addcomment">
+                                <i class="glyphicon glyphicon-comment "></i> Comment</a>
+                        </li>
+
+                        {% endif%}
+
+                    </ul>
+                </div>
+
+            </section>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,35 @@
+ {% extends "base.html" %} {% block content %} {% if user %} {{ p.render(user.key().id()) | safe }}
+<br>
+<div class="grid ">
+
+    {% for c in comments %}
+    <div class="row">
+        <div class="post-footer-comment-wrapper col-md-offset-3 col-md-5">
+            <div class="comment-form">
+                <div class="comment">
+                    <div class="media">
+                        <div class="media-left">
+                            <a href="#">
+                                <img class="media-object photo-profile" src="/static/images/default-photo.png" width="32" height="32" alt="...">
+                            </a>
+                        </div>
+                        <div class="media-body">
+                            <a href="#" class="anchor-username">
+                                <!-- this will be the username that have created that comment-->
+                                <h4 class="media-heading">{{c.user_name}}</h4>
+                            </a>
+                            <!-- this will be the time of creation of comment-->
+                            <span class="anchor-time">{{ c.created.strftime("%b %d, %Y") }}</span> <br> {% if user.key().id() == c.user_id %}
+                            <a class="dropdown-item" href="/{{p.key().id()}}/editcomment/{{c.key().id()}}">Edit </a>
+                            <a class="dropdown-item" href="/{{p.key().id()}}/deletecomment/{{c.key().id()}}">Delete</a> {% endif%}
+                        </div>
+                        <p> {{c.content}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+
+</div>
+<br><br> {% else %} {{ p.render(None) | safe }} {% endif %} {% endblock %}
