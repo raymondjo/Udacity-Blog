@@ -1,6 +1,6 @@
 # Udacity-Blog
 
-Blog: http://udacity-blog-177816.appspot.com/
+Blog: http://raymond-blog.appspot.com/
 
 ###Steps to run
 1. Clone the project (git clone https://github.com/raymondjo/Udacity-Blog)
